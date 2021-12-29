@@ -1,11 +1,25 @@
 import React from "react";
-import { Button, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
+import { Button, TextInput } from "react-native-paper";
 
 const Login = ({ navigation }) => {
   return (
     <View>
-      <Text>Login</Text>
-      <Button title="Sign-up" onPress={() => navigation.navigate("Register")} />
+      {/* underlineColor, activeUnderlineColor, outlineColor, activeOutlineColor */}
+      <TextInput
+        // mode="outlined"
+        label="Email"
+        // value={text}
+        onChangeText={(text) => console.log(text)}
+      />
+      <Button
+        icon="camera"
+        mode="contained"
+        // color="cyan"
+        onPress={() => navigation.navigate("Register")}
+      >
+        Sign-up
+      </Button>
     </View>
   );
 };
