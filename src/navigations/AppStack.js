@@ -1,12 +1,12 @@
 import React from "react";
+import { View } from "react-native";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
-import { Ionicons } from "@expo/vector-icons";
 import HomeScreen from "../screens/HomeScreen";
-import FormScreen from "../screens/FormScreen";
+import MoreScreen from "../screens/MoreScreen";
 
 const Tab = createMaterialBottomTabNavigator();
 
-export default function AppStack() {
+export default function AppStack({ user, handleUser, toggleTheme }) {
   return (
     <Tab.Navigator
       activeColor="#f0edf6"
@@ -15,14 +15,25 @@ export default function AppStack() {
     >
       <Tab.Screen
         name="Home"
-        component={HomeScreen}
-        tabBarIcon={({ tintColor }) => (
-          <View>
-            <Ionicons style={[{ color: tintColor }]} size={25} name="home" />
-          </View>
+        // options={{
+        //   tabBarIcon: ({ tintColor }) => (
+        //     <View>
+        //       <Ionicons style={[{ color: tintColor }]} size={20} name="home" />
+        //     </View>
+        //   ),
+        // }}
+      >
+        {(props) => <HomeScreen user={user} {...props} />}
+      </Tab.Screen>
+      <Tab.Screen name="More">
+        {(props) => (
+          <MoreScreen
+            handleUser={handleUser}
+            toggleTheme={toggleTheme}
+            {...props}
+          />
         )}
-      />
-      <Tab.Screen name="Form" component={FormScreen} />
+      </Tab.Screen>
     </Tab.Navigator>
   );
 }

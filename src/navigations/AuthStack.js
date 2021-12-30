@@ -1,18 +1,18 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import Login from "../screens/Login";
-import Register from "../screens/Register";
+import LoginScreen from "../screens/LoginScreen";
+import RegisterScreen from "../screens/RegisterScreen";
 
 const Stack = createStackNavigator();
 
-const AuthStack = () => {
+const AuthStack = ({ handleUser }) => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Login">
-        {(props) => <Login {...props} />}
+        {(props) => <LoginScreen handleUser={handleUser} {...props} />}
       </Stack.Screen>
       <Stack.Screen name="Register">
-        {(props) => <Register {...props} />}
+        {(props) => <RegisterScreen handleUser={handleUser} {...props} />}
       </Stack.Screen>
     </Stack.Navigator>
   );
