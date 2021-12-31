@@ -34,6 +34,15 @@ export default function Queries() {
     //   .get();
     data.forEach((doc) => console.log(doc.data()));
 
+    //REALTIME DATA
+    // db.collection("books").onSnapshot((querySnapshot) => {
+    //   var temp = [];
+    //   querySnapshot.forEach((doc) => {
+    //     temp.push(doc.data());
+    //   });
+    //   console.log(temp);
+    // });
+
     //WEB VERSION 9
     // try {
     //   const docRef = await addDoc(collection(db, "users"), {

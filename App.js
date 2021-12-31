@@ -15,7 +15,7 @@ import AuthStack from "./src/navigations/AuthStack";
 import AppStack from "./src/navigations/AppStack";
 
 export default function App() {
-  const [user, setUser] = useState(1);
+  const [user, setUser] = useState(null);
   const [isDark, setIsDark] = useState(false);
 
   const handleUser = (value) => {

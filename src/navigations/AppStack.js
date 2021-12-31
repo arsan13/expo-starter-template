@@ -1,6 +1,7 @@
 import React from "react";
 import { View } from "react-native";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+import { Ionicons } from "@expo/vector-icons";
 import HomeScreen from "../screens/HomeScreen";
 import MoreScreen from "../screens/MoreScreen";
 
@@ -15,13 +16,14 @@ export default function AppStack({ user, handleUser, toggleTheme }) {
     >
       <Tab.Screen
         name="Home"
-        // options={{
-        //   tabBarIcon: ({ tintColor }) => (
-        //     <View>
-        //       <Ionicons style={[{ color: tintColor }]} size={20} name="home" />
-        //     </View>
-        //   ),
-        // }}
+        options={{
+          tabBarLabel: "Home",
+          tabBarIcon: ({ tintColor }) => (
+            <View>
+              <Ionicons style={[{ color: tintColor }]} size={15} name="home" />
+            </View>
+          ),
+        }}
       >
         {(props) => <HomeScreen user={user} {...props} />}
       </Tab.Screen>
