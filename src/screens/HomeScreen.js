@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { StyleSheet, Text, View, FlatList } from "react-native";
 import { Button, Title } from "react-native-paper";
 import { db } from "../utils/firebase";
+import { useTheme } from "../contexts/ThemeProvider";
+import { getUser } from "../contexts/UserProvider";
 
-const HomeScreen = ({ user }) => {
+const HomeScreen = () => {
   const [books, setBooks] = useState([]);
+  const isDark = useTheme();
+  const user = getUser();
 
   const handleBuy = async (id) => {
     const addRef = await db.collection("transactions").doc(id).set({
@@ -39,7 +43,7 @@ const HomeScreen = ({ user }) => {
 
   const renderItem = (item) => {
     return (
-      <View style={styles.card}>
+      <View style={[styles.card, { borderColor: isDark ? "#fff" : "#041C32" }]}>
         <Title style={styles.text}>{item.item.bookName}</Title>
         <Title style={styles.text}>{item.item.price}</Title>
         <Title style={styles.text}>{item.item.published} year</Title>
@@ -49,8 +53,6 @@ const HomeScreen = ({ user }) => {
       </View>
     );
   };
-
-  console.log(books);
 
   return (
     <FlatList
@@ -62,8 +64,6 @@ const HomeScreen = ({ user }) => {
   );
 };
 
-export default HomeScreen;
-
 const styles = StyleSheet.create({
   card: {
     margin: 5,
@@ -74,3 +74,4 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
 });
+export default HomeScreen;

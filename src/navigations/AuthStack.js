@@ -5,14 +5,14 @@ import RegisterScreen from "../screens/RegisterScreen";
 
 const Stack = createStackNavigator();
 
-const AuthStack = ({ handleUser }) => {
+const AuthStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Login">
-        {(props) => <LoginScreen handleUser={handleUser} {...props} />}
+        {(props) => <LoginScreen {...props} />}
       </Stack.Screen>
       <Stack.Screen name="Register">
-        {(props) => <RegisterScreen handleUser={handleUser} {...props} />}
+        {(props) => <RegisterScreen {...props} />}
       </Stack.Screen>
     </Stack.Navigator>
   );

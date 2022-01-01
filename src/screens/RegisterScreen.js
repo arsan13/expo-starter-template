@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Button, TextInput } from "react-native-paper";
+import { updateUser } from "../contexts/UserProvider";
 import { db } from "../utils/firebase";
 
-const RegisterScreen = ({ handleUser }) => {
+const RegisterScreen = () => {
   let initialState = { name: "", email: "", password: "" };
   const [detail, setDetail] = useState(initialState);
+  const handleUser = updateUser();
 
   const handleChange = (key, value) => {
     setDetail({ ...detail, [key]: value });

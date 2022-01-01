@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { StyleSheet, View, TouchableOpacity, Alert } from "react-native";
 import { Button, TextInput, Title } from "react-native-paper";
+import { updateUser } from "../contexts/UserProvider";
 import { db } from "../utils/firebase";
 
-const LoginScreen = ({ navigation, handleUser }) => {
+const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const handleUser = updateUser();
 
   const handleSubmit = async () => {
     console.log({ email, password });

@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Button } from "react-native-paper";
+import { useThemeUpdate } from "../contexts/ThemeProvider";
+import { updateUser } from "../contexts/UserProvider";
 
-const MoreScreen = ({ handleUser, toggleTheme }) => {
+const MoreScreen = () => {
+  const toggleTheme = useThemeUpdate();
+  const handleUser = updateUser();
+
   return (
     <View style={{ flex: 1, justifyContent: "center" }}>
       <Button

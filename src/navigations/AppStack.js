@@ -7,7 +7,7 @@ import MoreScreen from "../screens/MoreScreen";
 
 const Tab = createMaterialBottomTabNavigator();
 
-export default function AppStack({ user, handleUser, toggleTheme }) {
+export default function AppStack() {
   return (
     <Tab.Navigator
       activeColor="#f0edf6"
@@ -25,16 +25,10 @@ export default function AppStack({ user, handleUser, toggleTheme }) {
           ),
         }}
       >
-        {(props) => <HomeScreen user={user} {...props} />}
+        {(props) => <HomeScreen {...props} />}
       </Tab.Screen>
       <Tab.Screen name="More">
-        {(props) => (
-          <MoreScreen
-            handleUser={handleUser}
-            toggleTheme={toggleTheme}
-            {...props}
-          />
-        )}
+        {(props) => <MoreScreen {...props} />}
       </Tab.Screen>
     </Tab.Navigator>
   );
