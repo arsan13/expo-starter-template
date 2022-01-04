@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, FlatList } from "react-native";
 import { Button, Title } from "react-native-paper";
 import { db } from "../utils/firebase";
@@ -55,12 +55,18 @@ const HomeScreen = () => {
   };
 
   return (
-    <FlatList
-      style={{ marginTop: 5 }}
-      data={books}
-      keyExtractor={(item) => item.bookId}
-      renderItem={renderItem}
-    />
+    <>
+      {books.length < 1 ? (
+        <Title>No data</Title>
+      ) : (
+        <FlatList
+          style={{ marginTop: 5 }}
+          data={books}
+          keyExtractor={(item) => item.bookId}
+          renderItem={renderItem}
+        />
+      )}
+    </>
   );
 };
 
