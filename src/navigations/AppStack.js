@@ -1,5 +1,4 @@
 import React from "react";
-import { View } from "react-native";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import HomeScreen from "../screens/HomeScreen";
@@ -7,7 +6,7 @@ import MoreScreen from "../screens/MoreScreen";
 
 const Tab = createMaterialBottomTabNavigator();
 
-export default function AppStack() {
+const AppStack = () => {
   return (
     <Tab.Navigator
       shifting={true}
@@ -46,4 +45,6 @@ export default function AppStack() {
       </Tab.Screen>
     </Tab.Navigator>
   );
-}
+};
+
+export default AppStack;

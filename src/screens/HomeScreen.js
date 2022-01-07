@@ -4,31 +4,38 @@ import { Button, Title } from "react-native-paper";
 import { db } from "../utils/firebase";
 import { useTheme } from "../contexts/ThemeProvider";
 import { getUser } from "../contexts/UserProvider";
+import { handleLoading } from "../contexts/LoadingProvider";
 
 const HomeScreen = () => {
   const [books, setBooks] = useState([]);
+  const setLoading = handleLoading();
   const isDark = useTheme();
   const user = getUser();
 
   const handleBuy = async (id) => {
+    setLoading(true);
     const addRef = await db.collection("transactions").doc(id).set({
       userId: user,
       bookId: id,
       date: new Date().toLocaleDateString(),
       sell: false,
     });
+    setLoading(false);
     console.log(addRef);
   };
 
   useEffect(() => {
     let temp = [];
     const getBooks = async () => {
+      setLoading(true);
       let data = await db.collection("books").get();
       // data.forEach((doc) => setBooks((prev) => [...prev, doc.data()]));
       data.forEach((doc) => temp.push(doc.data()));
       setBooks(data);
+      setLoading(false);
     };
     const getBooksRealtime = async () => {
+      setLoading(true);
       db.collection("books").onSnapshot((querySnapshot) => {
         var temp = [];
         querySnapshot.forEach((doc) => {
@@ -37,6 +44,7 @@ const HomeScreen = () => {
         console.log(temp);
         setBooks(temp);
       });
+      setLoading(false);
     };
     getBooksRealtime();
   }, []);

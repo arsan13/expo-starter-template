@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import { StyleSheet, View, TouchableOpacity, Alert } from "react-native";
 import { Button, TextInput, Title } from "react-native-paper";
+import { handleLoading } from "../contexts/LoadingProvider";
 import { updateUser } from "../contexts/UserProvider";
 import { db } from "../utils/firebase";
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const setLoading = handleLoading();
   const handleUser = updateUser();
 
   const handleSubmit = async () => {
+    setLoading(true);
     console.log({ email, password });
     const data = await db
       .collection("users")
@@ -18,8 +21,10 @@ const LoginScreen = ({ navigation }) => {
       .get();
     setEmail("");
     setPassword("");
-    if (data.docs.length > 0) handleUser(data.docs[0].data().email);
-    else {
+    if (data.docs.length > 0) {
+      setLoading(false);
+      handleUser(data.docs[0].data().email);
+    } else {
       console.log("Invalid credentials");
       Alert.alert("Unsuccessful", "Invalid credentials", [
         {
@@ -29,6 +34,7 @@ const LoginScreen = ({ navigation }) => {
         },
         { text: "OK", onPress: () => console.log("OK Pressed") },
       ]);
+      setLoading(false);
     }
   };
 

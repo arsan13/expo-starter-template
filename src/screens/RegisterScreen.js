@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Button, TextInput } from "react-native-paper";
+import { handleLoading } from "../contexts/LoadingProvider";
 import { updateUser } from "../contexts/UserProvider";
 import { db } from "../utils/firebase";
 
@@ -8,16 +9,22 @@ const RegisterScreen = () => {
   let initialState = { name: "", email: "", password: "" };
   const [detail, setDetail] = useState(initialState);
   const handleUser = updateUser();
+  const setLoading = handleLoading();
 
   const handleChange = (key, value) => {
     setDetail({ ...detail, [key]: value });
   };
 
   const handleSubmit = async () => {
-    if (!validate()) return;
-    await db.collection("users").doc(detail.email).set(detail);
-    setDetail(initialState);
-    handleUser(detail.email);
+    setLoading(true);
+    if (!validate()) {
+      setLoading(false);
+    } else {
+      await db.collection("users").doc(detail.email).set(detail);
+      setDetail(initialState);
+      setLoading(false);
+      handleUser(detail.email);
+    }
   };
 
   const validate = async () => {
