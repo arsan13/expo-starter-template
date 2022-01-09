@@ -1,6 +1,8 @@
 # An Expo starter template
 
-This template supports React Navigation for switching between screens and React Native Paper for building beautiful interfaces.
+This template supports [React Navigation](https://reactnavigation.org/) for switching between screens and [React Native Paper](https://reactnativepaper.com/) for building beautiful interfaces.
+
+## How to use
 
 Clone the project
 
