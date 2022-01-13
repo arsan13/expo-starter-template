@@ -21,8 +21,8 @@ const LoginScreen = ({ navigation }) => {
       .get();
     setEmail("");
     setPassword("");
+    setLoading(false);
     if (data.docs.length > 0) {
-      setLoading(false);
       handleUser(data.docs[0].data().email);
     } else {
       console.log("Invalid credentials");
@@ -34,7 +34,6 @@ const LoginScreen = ({ navigation }) => {
         },
         { text: "OK", onPress: () => console.log("OK Pressed") },
       ]);
-      setLoading(false);
     }
   };
 
